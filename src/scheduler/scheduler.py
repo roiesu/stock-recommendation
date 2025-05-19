@@ -1,10 +1,9 @@
 import time
 from src.core.data_collection import run
-
-INTERVAL_SECONDS = 300
+from src.utilities.constants import INTERVAL_SECONDS
 
 def loop():
-    print("Starting scheduler loop...")
+    print("Starting scheduler loop")
     while True:
         try:
             run()

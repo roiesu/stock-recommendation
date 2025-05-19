@@ -1,14 +1,26 @@
 from multiprocessing import Process
 import uvicorn
+import sys
+import traceback
 from src.scheduler.scheduler import loop
 
 def start_api():
-    print("Starting API server...")
-    uvicorn.run("src.api.api:app", host="127.0.0.1", port=8000, reload=False)
-
+    try:
+        print("Starting API server")
+        uvicorn.run("src.api.api:app", host="127.0.0.1", port=8000, reload=False)
+    except Exception as e:
+        print("API server crashed:")
+        traceback.print_exc()
+        sys.exit(1)
 
 def start_scheduler():
-    loop()
+    try:
+        print("Starting scheduler loop...")
+        loop()
+    except Exception as e:
+        print("Scheduler crashed:")
+        traceback.print_exc()
+        sys.exit(1)
 
 if __name__ == "__main__":
     p1 = Process(target=start_api)

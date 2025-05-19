@@ -2,7 +2,6 @@ import sqlite3
 import sys
 from pathlib import Path
 
-# מוסיף את root של הפרויקט ל־sys.path
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
 from src.utilities.constants import DB_PATH
@@ -10,7 +9,6 @@ from src.utilities.constants import DB_PATH
 def insert_dummy_data():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
-
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS prices (
@@ -20,18 +18,17 @@ def insert_dummy_data():
         )
     """)
 
-
     dummy_rows = [
-        ('AAPL', '2025-05-16 13:00:00+00:00', 210.0),  # left peak
+        ('AAPL', '2025-05-16 13:00:00+00:00', 210.0),
         ('AAPL', '2025-05-16 13:05:00+00:00', 208.0),
         ('AAPL', '2025-05-16 13:10:00+00:00', 205.0),
         ('AAPL', '2025-05-16 13:15:00+00:00', 202.0),
-        ('AAPL', '2025-05-16 13:20:00+00:00', 198.0),  # bottom (כעת עמוק מספיק)
+        ('AAPL', '2025-05-16 13:20:00+00:00', 198.0),
         ('AAPL', '2025-05-16 13:25:00+00:00', 203.0),
         ('AAPL', '2025-05-16 13:30:00+00:00', 206.0),
-        ('AAPL', '2025-05-16 13:35:00+00:00', 209.0),  # right peak
-        ('AAPL', '2025-05-16 13:40:00+00:00', 206.0),  # handle dip
-        ('AAPL', '2025-05-16 13:45:00+00:00', 208.0),  # recovery
+        ('AAPL', '2025-05-16 13:35:00+00:00', 209.0),
+        ('AAPL', '2025-05-16 13:40:00+00:00', 206.0),
+        ('AAPL', '2025-05-16 13:45:00+00:00', 208.0),
     ]
 
     cursor.executemany(
@@ -41,7 +38,7 @@ def insert_dummy_data():
 
     conn.commit()
     conn.close()
-    print(f"✅ Inserted {len(dummy_rows)} dummy rows into {DB_PATH}")
+    print(f"Inserted {len(dummy_rows)} dummy rows into {DB_PATH}")
 
 if __name__ == "__main__":
     insert_dummy_data()

@@ -2,17 +2,7 @@ from decimal import Decimal
 from typing import List
 
 def detect_cup_and_handle(prices: List[Decimal], tolerance: float = 0.03) -> bool:
-    """
-    Detects a basic cup and handle pattern in a list of close prices.
-
-    Args:
-        prices (List[Decimal]): List of close prices in chronological order.
-        tolerance (float): Allowed percent difference between the two peaks (default: 3%)
-
-    Returns:
-        bool: True if a pattern is detected, otherwise False.
-    """
-    if len(prices) < 7:
+    if len(prices) < 10:
         return False  # Not enough data
 
     # 1. Find the lowest point (cup bottom)

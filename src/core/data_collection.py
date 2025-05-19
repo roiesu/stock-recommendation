@@ -18,9 +18,7 @@ def is_trading_hours():
     )
 
 def fetch_prices():
-    prices = []
-    now = datetime.now(timezone.utc)
-    
+    prices = []    
     start, end = get_data_interval()
 
     for ticker in TICKERS:

@@ -1,7 +1,6 @@
 import sqlite3
 from datetime import datetime, timedelta, timezone
 from src.utilities.constants import DB_PATH
-import os
 
 def init_db(conn):
     conn.execute("""
@@ -36,21 +35,16 @@ def get_prices_for_ticker(ticker: str) -> list[float]:
         conn = sqlite3.connect(DB_PATH)
         init_db(conn)
         cursor = conn.cursor()
-
-        print(f"📝 Executing SELECT for {ticker}")
         cursor.execute("""
             SELECT price FROM prices
             WHERE ticker = ?
             ORDER BY timestamp DESC
         """, (ticker,))
-        
         rows = cursor.fetchall()
-        print(f"✅ Retrieved {len(rows)} rows for {ticker}")
-
         conn.close()
         return [float(row[0]) for row in rows]
 
     except Exception as e:
-        print(f"🔥 DB error: {e}")
+        print(f"DB error: {e}")
         raise
 
