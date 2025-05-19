@@ -22,8 +22,8 @@ src/
 ├── core/             # Data collection & database logic
 ├── scheduler/        # Price polling loop
 ├── utilities/        # Time functions & constants
-├── tests/            # (Optional) testing scripts
-├── run.py            # Main entry point to launch the system
+tests/            # (Optional) testing scripts
+run.py            # Main entry point to launch the system
 ```
 
 ---
